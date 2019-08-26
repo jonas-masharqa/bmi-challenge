@@ -43,6 +43,7 @@
 global.calculateForm = document.querySelector('#calculate');
 global.displayValueElement = document.querySelector('#display_value');
 global.displayMessageElement = document.querySelector('#display_message');
+global.methodSelector = document.querySelector('#my_select');
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -61,16 +62,23 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 const calculateBMI = () => {
+    let method = global.methodSelector.options[global.methodSelector.selectedIndex].value
+    // finds value for the method
     return new Promise(resolve => {
+
+        let weightFormat = method === 'metric' ? 'weight-in-kgs' : 'weight-in-lbs'
+        let heightFormat = method === 'metric' ? 'height-in-cm' : 'height-in-in'
         
-        let w = parseFloat(document.getElementById('weight-in-kgs').value);
-        let h = parseFloat(document.getElementById('height-in-cm').value);
+        let w = parseFloat(document.getElementById(weightFormat).value);
+        let h = parseFloat(document.getElementById(heightFormat).value);
+        
         let person = new Person({
             weight: w,
             height: h,
         });
-        person.calculate_bmi();
-        resolve(person);
+
+        method === 'metric' ? person.calculate_bmi() : person.calculate_imperial_bmi();
+         resolve(person);
     })
 };
 
