@@ -11,6 +11,11 @@ if (typeof module !== 'undefined' && module.exports) {
     module.exports = Person;
 }
 
+Person.prototype.calculate_imperial_bmi  = function() {
+    calculator = new BMICalculator();
+    calculator.imperial_bmi(this);
+  };
+
 
 
 
