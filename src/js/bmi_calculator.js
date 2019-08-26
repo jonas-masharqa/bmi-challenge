@@ -28,7 +28,7 @@ function setBMIMessage (obj){
       obj.bmiMessage = "Obese"
     }
   }
-};
+
 
 
 // 1. Informs the result in a message, or string.
